@@ -2,6 +2,9 @@
 
 ## The pragmatic map viewer and editor for the desktop.
 
+Travis status:
+[![Build Status](https://travis-ci.org/heltonbiker/MapComplete.svg?branch=dev)](https://travis-ci.org/heltonbiker/MapComplete)
+
 Desired Features:
 
  - Use KML files - as many as you want! - to store and manage your collection of tracks.

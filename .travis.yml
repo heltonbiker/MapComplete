@@ -3,7 +3,8 @@ python:
   - "2.7"
   - "3.5"
 notifications:
-  email: false  
+  email: false
+cache: pip  
 before_install:
   - sudo mkdir -p /downloads
   - sudo chmod a+rw /downloads

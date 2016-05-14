@@ -37,4 +37,4 @@ install:
   # Builds Complete
   - popd
 script:
-  tests.py
+  - python tests.py

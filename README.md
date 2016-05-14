@@ -31,6 +31,3 @@ If you want to discuss any new development or ongoing development we suggest you
 - Participate on the project's [mailing list](https://groups.google.com/forum/#!forum/mapcomplete)!
 - Open a new Issue;
 - Fork the `dev` branch and start creating Pull Requests.
-
-
-------------------------------

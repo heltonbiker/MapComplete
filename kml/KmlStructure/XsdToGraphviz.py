@@ -1,6 +1,6 @@
 from xml.dom import minidom
 
-content = minidom.parse('ogckml22.xsd')
+content = minidom.parse('schema.xsd')
 
 step = 2
 def traverse(node, level):

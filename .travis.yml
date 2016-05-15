@@ -38,4 +38,4 @@ cache: pip
 #   # Builds Complete
 #   - popd
 script:
-  - python tests.py
+  - python -m unittest discover

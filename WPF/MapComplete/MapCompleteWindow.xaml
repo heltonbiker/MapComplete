@@ -23,14 +23,20 @@
 			<TextBlock x:Name="placeholder" Text="Status Bar" VerticalAlignment="Center"/>
 		</Border>
 
-		<Grid DockPanel.Dock="Top">
+		<Grid x:Name="PanelGrid" DockPanel.Dock="Top">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition x:Name="LeftPanelColumn" Width="1*"/>
 				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition x:Name="RightPanelColumn" Width="3*"/>
 			</Grid.ColumnDefinitions>
 
-			<GridSplitter Width="5" Grid.Column="1" Background="{StaticResource BackgroundLightGray}"/>
+			<GridSplitter 
+				ResizeBehavior="PreviousAndNext"
+				ResizeDirection="Columns"
+				Width="5" Grid.Column="1"
+				Background="{StaticResource BackgroundLightGray}"/>
 		</Grid>
+
+		<TreeView x:Name="ObjectGraph" Grid.Column="0" ItemsSource="{Binding ObjectGraph}"/>
 	</DockPanel>
 </Window>

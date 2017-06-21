@@ -23,6 +23,26 @@ namespace MapComplete
 		public MapCompleteWindow()
 		{
 			InitializeComponent();
+
+			SourceInitialized += MapCompleteWindow_Initialized;
+
+			Closing += MapCompleteWindow_Closing;
 		}
+
+
+		private void MapCompleteWindow_Initialized(object sender, EventArgs e)
+		{
+			LeftPanelColumn.Width = Properties.Settings.Default.LeftPanelWidth;
+			RightPanelColumn.Width = Properties.Settings.Default.RightPanelWidth;
+		}
+
+		private void MapCompleteWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			Properties.Settings.Default.LeftPanelWidth = LeftPanelColumn.Width;
+			Properties.Settings.Default.RightPanelWidth = RightPanelColumn.Width;
+
+			Properties.Settings.Default.Save();
+		}
+
 	}
 }

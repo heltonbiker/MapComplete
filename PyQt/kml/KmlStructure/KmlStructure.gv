@@ -1,0 +1,162 @@
+digraph g {
+
+rankdir = "RL"
+
+node [shape="record"]
+
+// http://stackoverflow.com/a/7062842/401828  !!!!!
+
+subgraph NativeTypes {
+	double
+	string
+	hexBinary
+}
+
+subgraph Types
+{
+	anglepos90
+	angle90
+	anglepos180
+	angle180
+	angle360
+	altitudeModeEnum
+	color
+	coordinates
+	colorModeEnum
+	dateTime
+	displayModeEnum
+	gridOriginEnum
+	itemIconState
+	itemIconStateEnum
+	listItemTypeEnum
+	refreshModeEnum
+	viewRefreshModeEnum
+	shapeEnum
+	styleStateEnum
+}
+
+subgraph Element
+{
+	node [style="filled", bgcolor="#ccc"]
+
+	Document [label="Document|Features\lSchemas\l"]
+	Folder
+	Placemark
+	Style
+	LineString
+	Point
+	Polygon
+	LinearRing
+	GroundOverlay
+	LineStyle
+	PolyStyle
+	IconStyle
+}
+
+anglepos90 -> double
+angle90 -> double
+anglepos180 -> double
+angle180 -> double
+angle360 -> double
+
+altitudeModeEnum -> string
+color -> hexBinary
+coordinates -> string
+colorModeEnum -> string
+displayModeEnum -> string
+gridOriginEnum -> string
+
+listItemTypeEnum -> string
+
+vec2
+
+AbstractObject [label="AbstractObject|Id : string"]
+
+AbstractFeature [label="AbstractFeature|name\lvisibility\lopen\laddress\lphone\lregion\ldescription\lstyleUrl\lStyleSelector\l"]
+AbstractFeature -> AbstractObject
+AbstractView -> AbstractObject
+AbstractGeometry -> AbstractObject
+AbstractStyleSelector -> AbstractObject
+AbstractTimePrimitive -> AbstractObject
+
+AbstractContainer -> AbstractFeature
+AbstractOverlay -> AbstractFeature
+
+Document -> AbstractContainer
+Folder -> AbstractContainer
+
+Placemark [label="Placemark|<f1>geometry"]
+Placemark -> AbstractFeature
+NetworkLink -> AbstractFeature
+
+Placemark:f1 -> AbstractGeometry
+
+//Snippet -> string
+//LookAt -> AbstractView
+//Camera -> AbstractView
+//Metadata
+//ExtendedData
+//SchemaData -> AbstractObject
+
+//SimpleData -> string
+//Data -> AbstractObject
+
+
+Kml
+NetworkLinkControl
+Schema
+//SimpleField
+Region -> AbstractObject
+LatLonAltBox -> AbstractLatLonBox
+Lod -> AbstractObject
+Link -> BasicLink
+MultiGeometry -> AbstractGeometry
+Point -> AbstractGeometry
+LineString -> AbstractGeometry
+LinearRing -> AbstractGeometry
+Polygon -> AbstractGeometry
+Boundary
+
+/*
+Model -> AbstractGeometry
+Location -> AbstractObject
+Orientation -> AbstractObject
+Scale -> AbstractObject
+*/
+
+//ResourceMap -> AbstractObject
+//Alias -> AbstractObject
+GroundOverlay -> AbstractOverlay
+AbstractLatLonBox -> AbstractObject
+LatLonBox -> AbstractLatLonBox
+
+ScreenOverlay -> AbstractOverlay
+PhotoOverlay -> AbstractOverlay
+ViewVolume -> AbstractObject
+
+//ImagePyramid -> AbstractObject
+
+Style [label="Style|IconStyle\lLineStyle\lPolyStyle\lBaloonStyle\lListStyle\lLabelStyle\l"]
+Style -> AbstractStyleSelector
+StyleMap -> AbstractStyleSelector
+
+//Pair -> AbstractObject
+
+AbstractSubStyle -> AbstractObject
+AbstractColorStyle -> AbstractSubStyle
+IconStyle -> AbstractColorStyle
+BasicLink -> AbstractObject
+LabelStyle -> AbstractColorStyle
+LineStyle -> AbstractColorStyle
+PolyStyle -> AbstractColorStyle
+BalloonStyle -> AbstractSubStyle
+ListStyle -> AbstractSubStyle
+
+ItemIcon -> AbstractObject
+
+/*
+TimeStamp -> AbstractTimePrimitive
+TimeSpan -> AbstractTimePrimitive
+*/
+
+}

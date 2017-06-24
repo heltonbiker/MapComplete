@@ -22,104 +22,104 @@ namespace MapComplete.MapControl
     /// <summary>Represents the default map class.</summary>
     public class Map : MapCore
     {
-        //private static class LogEntry
-        //{
-        //    public const string StartSession = "0";
+		//private static class LogEntry
+		//{
+		//    public const string StartSession = "0";
 
-        //    public const string ChangeCredentials = "2";
-        //}
+		//    public const string ChangeCredentials = "2";
+		//}
 
-        //private class StoredManipulationDelta2D
-        //{
-        //    public int OriginX
-        //    {
-        //        get;
-        //        set;
-        //    }
+		private class StoredManipulationDelta2D
+		{
+			public int OriginX
+			{
+				get;
+				set;
+			}
 
-        //    public int OriginY
-        //    {
-        //        get;
-        //        set;
-        //    }
+			public int OriginY
+			{
+				get;
+				set;
+			}
 
-        //    public float Rotation
-        //    {
-        //        get;
-        //        set;
-        //    }
+			public float Rotation
+			{
+				get;
+				set;
+			}
 
-        //    public float ScaleX
-        //    {
-        //        get;
-        //        set;
-        //    }
+			public float ScaleX
+			{
+				get;
+				set;
+			}
 
-        //    public float ScaleY
-        //    {
-        //        get;
-        //        set;
-        //    }
+			public float ScaleY
+			{
+				get;
+				set;
+			}
 
-        //    public float TranslationX
-        //    {
-        //        get;
-        //        set;
-        //    }
+			public float TranslationX
+			{
+				get;
+				set;
+			}
 
-        //    public float TranslationY
-        //    {
-        //        get;
-        //        set;
-        //    }
+			public float TranslationY
+			{
+				get;
+				set;
+			}
 
-        //    public StoredManipulationDelta2D()
-        //    {
-        //        this.Reset();
-        //    }
+			public StoredManipulationDelta2D()
+			{
+				this.Reset();
+			}
 
-        //    public bool Accumulate(Manipulation2DDeltaEventArgs additional)
-        //    {
-        //        bool flag = true;
-        //        if (this.OriginY == -2147483648)
-        //        {
-        //            this.OriginX = (int)Math.Round((double)additional.OriginX);
-        //            this.OriginY = (int)Math.Round((double)additional.OriginY);
-        //        }
-        //        this.ScaleX *= additional.Delta.ScaleX;
-        //        this.ScaleY *= additional.Delta.ScaleX;
-        //        if (Math.Abs(this.OriginX - (int)Math.Round((double)additional.OriginX)) > 2 || Math.Abs(this.OriginY - (int)Math.Round((double)additional.OriginY)) > 2)
-        //        {
-        //            flag = false;
-        //        }
-        //        this.Rotation += additional.Delta.Rotation;
-        //        this.TranslationX += additional.Delta.TranslationX;
-        //        this.TranslationY += additional.Delta.TranslationY;
-        //        return ((double)Math.Abs(this.Rotation) >= 0.1 || (double)Math.Abs(1f - this.ScaleX) >= 0.1 || (double)Math.Abs(1f - this.ScaleY) >= 0.1 || Math.Abs(this.TranslationX) >= 2f || Math.Abs(this.TranslationY) >= 2f) && flag;
-        //    }
+			public bool Accumulate(Manipulation2DDeltaEventArgs additional)
+			{
+				bool flag = true;
+				if (this.OriginY == -2147483648)
+				{
+					this.OriginX = (int)Math.Round((double)additional.OriginX);
+					this.OriginY = (int)Math.Round((double)additional.OriginY);
+				}
+				this.ScaleX *= additional.Delta.ScaleX;
+				this.ScaleY *= additional.Delta.ScaleX;
+				if (Math.Abs(this.OriginX - (int)Math.Round((double)additional.OriginX)) > 2 || Math.Abs(this.OriginY - (int)Math.Round((double)additional.OriginY)) > 2)
+				{
+					flag = false;
+				}
+				this.Rotation += additional.Delta.Rotation;
+				this.TranslationX += additional.Delta.TranslationX;
+				this.TranslationY += additional.Delta.TranslationY;
+				return ((double)Math.Abs(this.Rotation) >= 0.1 || (double)Math.Abs(1f - this.ScaleX) >= 0.1 || (double)Math.Abs(1f - this.ScaleY) >= 0.1 || Math.Abs(this.TranslationX) >= 2f || Math.Abs(this.TranslationY) >= 2f) && flag;
+			}
 
-        //    public void Reset()
-        //    {
-        //        this.Rotation = 0f;
-        //        this.TranslationX = 0f;
-        //        this.TranslationY = 0f;
-        //        this.ScaleX = 1f;
-        //        this.ScaleY = 1f;
-        //        this.OriginX = -2147483648;
-        //        this.OriginY = -2147483648;
-        //    }
+			public void Reset()
+			{
+				this.Rotation = 0f;
+				this.TranslationX = 0f;
+				this.TranslationY = 0f;
+				this.ScaleX = 1f;
+				this.ScaleY = 1f;
+				this.OriginX = -2147483648;
+				this.OriginY = -2147483648;
+			}
 
-        //    public bool HasValuesStored()
-        //    {
-        //        return this.OriginX != -2147483648;
-        //    }
-        //}
+			public bool HasValuesStored()
+			{
+				return this.OriginX != -2147483648;
+			}
+		}
 
-        //private WeakEventListener<Map, object, PropertyChangedEventArgs> _weakMapCredentials;
+		//private WeakEventListener<Map, object, PropertyChangedEventArgs> _weakMapCredentials;
 
-        //private bool firstFrameDone;
+		//private bool firstFrameDone;
 
-        private bool getConfigurationDone;
+		private bool getConfigurationDone;
 
         //private bool settingDefaultCredentials;
 
@@ -137,15 +137,15 @@ namespace MapComplete.MapControl
 
         //private Point _LeftButtonDownViewportPoint = default(Point);
 
-        //private bool _useInertia;
+        private bool _useInertia;
 
-        //private ManipulationProcessor2D _ManipulationProcessor;
+        private ManipulationProcessor2D _ManipulationProcessor;
 
-        //private InertiaProcessor2D _InertiaProcessor;
+        private InertiaProcessor2D _InertiaProcessor;
 
-        //private Map.StoredManipulationDelta2D storedManipulation = new Map.StoredManipulationDelta2D();
+        private Map.StoredManipulationDelta2D storedManipulation = new Map.StoredManipulationDelta2D();
 
-        //private DispatcherTimer _InertiaTimer;
+        private DispatcherTimer _InertiaTimer;
 
         private static bool _useHttps;
 
@@ -153,19 +153,19 @@ namespace MapComplete.MapControl
 
         //private int _doubleTapThreshold = 20;
 
-        //private Point? _touchTapPointPrevious = null;
+        private Point? _touchTapPointPrevious = null;
 
         //private DateTime? _touchTapTimePrevious = null;
 
-        //private Point? _touchTapPointCurrent = null;
+        private Point? _touchTapPointCurrent = null;
 
-        //private DateTime? _touchTapTimeCurrent = null;
+        private DateTime? _touchTapTimeCurrent = null;
 
         //private long _lastTouchTick;
 
-        //private int _touchCount;
+        private int _touchCount;
 
-        //private Point _velocity;
+        private Point _velocity;
 
         //private Point _previousMousePoint;
 
@@ -175,7 +175,7 @@ namespace MapComplete.MapControl
 
         private static string version;
 
-		//private Manipulations2D _SupportedManipulations = Manipulations2D.All;
+		private Manipulations2D _SupportedManipulations = Manipulations2D.All;
 
 		//private event EventHandler<LoadingErrorEventArgs> loadingErrorEvent;
 
@@ -288,19 +288,19 @@ namespace MapComplete.MapControl
 		//    }
 		//}
 
-		///// <summary>Gets or sets whether to use the inertial animation effect during map navigation.</summary>
-		///// <returns>Returns <see cref="T:System.Boolean"></see>.</returns>
-		//public bool UseInertia
-		//{
-		//    get
-		//    {
-		//        return this._useInertia;
-		//    }
-		//    set
-		//    {
-		//        this._useInertia = value;
-		//    }
-		//}
+		/// <summary>Gets or sets whether to use the inertial animation effect during map navigation.</summary>
+		/// <returns>Returns <see cref="T:System.Boolean"></see>.</returns>
+		public bool UseInertia
+		{
+			get
+			{
+				return this._useInertia;
+			}
+			set
+			{
+				this._useInertia = value;
+			}
+		}
 
 		//private static bool IsInDesignMode
 		//{
@@ -342,31 +342,31 @@ namespace MapComplete.MapControl
         
 		    this._MapForeground = new MapForeground(this);        
 		    base.MapForegroundContainer.Children.Add(this._MapForeground);
-        
-        //    this._ManipulationProcessor = new ManipulationProcessor2D(this._SupportedManipulations);
-        //    this._ManipulationProcessor.Started += new EventHandler<Manipulation2DStartedEventArgs>(this.ManipulationProcessor_Started);
-        //    this._ManipulationProcessor.Delta += new EventHandler<Manipulation2DDeltaEventArgs>(this.ManipulationProcessor_Delta);
-        //    this._ManipulationProcessor.Completed += new EventHandler<Manipulation2DCompletedEventArgs>(this.ManipulationProcessor_Completed);
-        
-        //    this._InertiaProcessor = new InertiaProcessor2D();
-        //    this._InertiaProcessor.TranslationBehavior.DesiredDeceleration = 0.00384f;
-        //    this._InertiaProcessor.ExpansionBehavior.DesiredDeceleration = 9.6E-05f;
-        //    this._InertiaProcessor.RotationBehavior.DesiredDeceleration = 0.00072f;
-        //    this._InertiaProcessor.Delta += new EventHandler<Manipulation2DDeltaEventArgs>(this.ManipulationProcessor_Delta);
-        //    this._InertiaProcessor.Completed += delegate (object sender, Manipulation2DCompletedEventArgs e)
-        //    {
-        //        this.StopInertia();
-        //    };
-        //    this._InertiaTimer = new DispatcherTimer
-        //    {
-        //        Interval = TimeSpan.FromMilliseconds(30.0)
-        //    };
-        //    this._InertiaTimer.Tick += delegate (object sender, EventArgs e)
-        //    {
-        //        this._InertiaProcessor.Process(DateTime.UtcNow.Ticks);
-        //    };
 
-            base.IsTabStop = true;
+			this._ManipulationProcessor = new ManipulationProcessor2D(this._SupportedManipulations);
+			this._ManipulationProcessor.Started += new EventHandler<Manipulation2DStartedEventArgs>(this.ManipulationProcessor_Started);
+			this._ManipulationProcessor.Delta += new EventHandler<Manipulation2DDeltaEventArgs>(this.ManipulationProcessor_Delta);
+			this._ManipulationProcessor.Completed += new EventHandler<Manipulation2DCompletedEventArgs>(this.ManipulationProcessor_Completed);
+
+			this._InertiaProcessor = new InertiaProcessor2D();
+			this._InertiaProcessor.TranslationBehavior.DesiredDeceleration = 0.00384f;
+			this._InertiaProcessor.ExpansionBehavior.DesiredDeceleration = 9.6E-05f;
+			this._InertiaProcessor.RotationBehavior.DesiredDeceleration = 0.00072f;
+			this._InertiaProcessor.Delta += new EventHandler<Manipulation2DDeltaEventArgs>(this.ManipulationProcessor_Delta);
+			this._InertiaProcessor.Completed += delegate (object sender, Manipulation2DCompletedEventArgs e)
+			{
+				this.StopInertia();
+			};
+			this._InertiaTimer = new DispatcherTimer
+			{
+				Interval = TimeSpan.FromMilliseconds(30.0)
+			};
+			this._InertiaTimer.Tick += delegate (object sender, EventArgs e)
+			{
+				this._InertiaProcessor.Process(DateTime.UtcNow.Ticks);
+			};
+
+			base.IsTabStop = true;
         }
 
 		//~Map()
@@ -660,102 +660,102 @@ namespace MapComplete.MapControl
 		//    }
 		//}
 
-		//private void ManipulationProcessor_Started(object sender, Manipulation2DStartedEventArgs e)
-		//{
-		//    this.StopInertia();
-		//    this._touchTapPointCurrent = new Point?(new Point((double)e.OriginX, (double)e.OriginY));
-		//    this._touchTapTimeCurrent = new DateTime?(DateTime.Now);
-		//}
+		private void ManipulationProcessor_Started(object sender, Manipulation2DStartedEventArgs e)
+		{
+			this.StopInertia();
+			this._touchTapPointCurrent = new Point?(new Point((double)e.OriginX, (double)e.OriginY));
+			this._touchTapTimeCurrent = new DateTime?(DateTime.Now);
+		}
 
-		//private void ManipulationProcessor_Delta(object sender, Manipulation2DDeltaEventArgs e)
-		//{
-		//    if (!this.UseInertia && this._InertiaProcessor.IsRunning)
-		//    {
-		//        return;
-		//    }
-		//    if (this.storedManipulation.Accumulate(e))
-		//    {
-		//        return;
-		//    }
-		//    this.ProcessStoredManipulation();
-		//}
+		private void ManipulationProcessor_Delta(object sender, Manipulation2DDeltaEventArgs e)
+		{
+			if (!this.UseInertia && this._InertiaProcessor.IsRunning)
+			{
+				return;
+			}
+			if (this.storedManipulation.Accumulate(e))
+			{
+				return;
+			}
+			this.ProcessStoredManipulation();
+		}
 
-		//private void ProcessStoredManipulation()
-		//{
-		//    if (!this.storedManipulation.HasValuesStored())
-		//    {
-		//        return;
-		//    }
-		//    double heading = base.TargetHeading + (double)this.storedManipulation.Rotation * 57.295779513082323;
-		//    AnimationLevel animationLevel = base.AnimationLevel;
-		//    base.AnimationLevel = AnimationLevel.None;
-		//    if (this._touchCount > 1)
-		//    {
-		//        base.ZoomAndRotateOrigin = new Point?(new Point((double)this.storedManipulation.OriginX, (double)this.storedManipulation.OriginY));
-		//        if (this.storedManipulation.ScaleX != 1f || this.storedManipulation.ScaleY != 1f)
-		//        {
-		//            this._cancelDoubleTap();
-		//            double d = (double)Math.Max(this.storedManipulation.ScaleX, this.storedManipulation.ScaleY);
-		//            this.ZoomAboutViewportPoint(Math.Log(d) / Math.Log(2.0), base.ZoomAndRotateOrigin.Value);
-		//        }
-		//        if (this.storedManipulation.Rotation != 0f)
-		//        {
-		//            this._cancelDoubleTap();
-		//            base.ViewBeingSetByUserInput = true;
-		//            base.SetView(base.TargetZoomLevel, heading);
-		//            base.ViewBeingSetByUserInput = false;
-		//        }
-		//    }
-		//    if (this.storedManipulation.TranslationX != 0f || this.storedManipulation.TranslationY != 0f)
-		//    {
-		//        if (Math.Abs(this.storedManipulation.TranslationX) > (float)this._doubleTapThreshold || Math.Abs(this.storedManipulation.TranslationY) > (float)this._doubleTapThreshold)
-		//        {
-		//            this._cancelDoubleTap();
-		//        }
-		//        Point centerNormalizedMercator = base.TransformViewportToNormalizedMercator_Target(new Point(base.ActualWidth / 2.0 - (double)this.storedManipulation.TranslationX, base.ActualHeight / 2.0 - (double)this.storedManipulation.TranslationY));
-		//        base.ZoomAndRotateOrigin = null;
-		//        base.ViewBeingSetByUserInput = true;
-		//        base.SetView(centerNormalizedMercator, base.TargetZoomLevel, heading);
-		//        base.ViewBeingSetByUserInput = false;
-		//    }
-		//    base.AnimationLevel = animationLevel;
-		//    this.storedManipulation.Reset();
-		//}
+		private void ProcessStoredManipulation()
+		{
+			//if (!this.storedManipulation.HasValuesStored())
+			//{
+			//	return;
+			//}
+			//double heading = base.TargetHeading + (double)this.storedManipulation.Rotation * 57.295779513082323;
+			//AnimationLevel animationLevel = base.AnimationLevel;
+			//base.AnimationLevel = AnimationLevel.None;
+			//if (this._touchCount > 1)
+			//{
+			//	base.ZoomAndRotateOrigin = new Point?(new Point((double)this.storedManipulation.OriginX, (double)this.storedManipulation.OriginY));
+			//	if (this.storedManipulation.ScaleX != 1f || this.storedManipulation.ScaleY != 1f)
+			//	{
+			//		this._cancelDoubleTap();
+			//		double d = (double)Math.Max(this.storedManipulation.ScaleX, this.storedManipulation.ScaleY);
+			//		this.ZoomAboutViewportPoint(Math.Log(d) / Math.Log(2.0), base.ZoomAndRotateOrigin.Value);
+			//	}
+			//	if (this.storedManipulation.Rotation != 0f)
+			//	{
+			//		this._cancelDoubleTap();
+			//		base.ViewBeingSetByUserInput = true;
+			//		base.SetView(base.TargetZoomLevel, heading);
+			//		base.ViewBeingSetByUserInput = false;
+			//	}
+			//}
+			//if (this.storedManipulation.TranslationX != 0f || this.storedManipulation.TranslationY != 0f)
+			//{
+			//	if (Math.Abs(this.storedManipulation.TranslationX) > (float)this._doubleTapThreshold || Math.Abs(this.storedManipulation.TranslationY) > (float)this._doubleTapThreshold)
+			//	{
+			//		this._cancelDoubleTap();
+			//	}
+			//	Point centerNormalizedMercator = base.TransformViewportToNormalizedMercator_Target(new Point(base.ActualWidth / 2.0 - (double)this.storedManipulation.TranslationX, base.ActualHeight / 2.0 - (double)this.storedManipulation.TranslationY));
+			//	base.ZoomAndRotateOrigin = null;
+			//	base.ViewBeingSetByUserInput = true;
+			//	base.SetView(centerNormalizedMercator, base.TargetZoomLevel, heading);
+			//	base.ViewBeingSetByUserInput = false;
+			//}
+			//base.AnimationLevel = animationLevel;
+			//this.storedManipulation.Reset();
+		}
 
-		//private void ManipulationProcessor_Completed(object sender, Manipulation2DCompletedEventArgs e)
-		//{
-		//    this.ProcessStoredManipulation();
-		//    bool flag = false;
-		//    if (this._touchTapPointCurrent.HasValue)
-		//    {
-		//        if (this._touchTapPointPrevious.HasValue && (DateTime.Now - this._touchTapTimePrevious.Value).Milliseconds < this._doubleTapDelay && Math.Abs(this._touchTapPointCurrent.Value.X - this._touchTapPointPrevious.Value.X) < (double)this._doubleTapThreshold && Math.Abs(this._touchTapPointCurrent.Value.Y - this._touchTapPointPrevious.Value.Y) < (double)this._doubleTapThreshold)
-		//        {
-		//            this.ZoomAboutViewportPoint(1.0, this._touchTapPointCurrent.Value);
-		//            this._cancelDoubleTap();
-		//            flag = true;
-		//        }
-		//        else
-		//        {
-		//            this._touchTapPointPrevious = this._touchTapPointCurrent;
-		//            this._touchTapTimePrevious = this._touchTapTimeCurrent;
-		//        }
-		//    }
-		//    if (this.UseInertia && !flag && !this._InertiaTimer.IsEnabled)
-		//    {
-		//        this._InertiaProcessor.InitialOriginX = e.OriginX;
-		//        this._InertiaProcessor.InitialOriginY = e.OriginY;
-		//        this._InertiaProcessor.TranslationBehavior.InitialVelocityX = e.Velocities.LinearVelocityX;
-		//        this._InertiaProcessor.TranslationBehavior.InitialVelocityY = e.Velocities.LinearVelocityY;
-		//        this._InertiaProcessor.Process(DateTime.UtcNow.Ticks);
-		//        this._InertiaTimer.Start();
-		//    }
-		//}
+		private void ManipulationProcessor_Completed(object sender, Manipulation2DCompletedEventArgs e)
+		{
+			//this.ProcessStoredManipulation();
+			//bool flag = false;
+			//if (this._touchTapPointCurrent.HasValue)
+			//{
+			//	if (this._touchTapPointPrevious.HasValue && (DateTime.Now - this._touchTapTimePrevious.Value).Milliseconds < this._doubleTapDelay && Math.Abs(this._touchTapPointCurrent.Value.X - this._touchTapPointPrevious.Value.X) < (double)this._doubleTapThreshold && Math.Abs(this._touchTapPointCurrent.Value.Y - this._touchTapPointPrevious.Value.Y) < (double)this._doubleTapThreshold)
+			//	{
+			//		this.ZoomAboutViewportPoint(1.0, this._touchTapPointCurrent.Value);
+			//		this._cancelDoubleTap();
+			//		flag = true;
+			//	}
+			//	else
+			//	{
+			//		this._touchTapPointPrevious = this._touchTapPointCurrent;
+			//		this._touchTapTimePrevious = this._touchTapTimeCurrent;
+			//	}
+			//}
+			//if (this.UseInertia && !flag && !this._InertiaTimer.IsEnabled)
+			//{
+			//	this._InertiaProcessor.InitialOriginX = e.OriginX;
+			//	this._InertiaProcessor.InitialOriginY = e.OriginY;
+			//	this._InertiaProcessor.TranslationBehavior.InitialVelocityX = e.Velocities.LinearVelocityX;
+			//	this._InertiaProcessor.TranslationBehavior.InitialVelocityY = e.Velocities.LinearVelocityY;
+			//	this._InertiaProcessor.Process(DateTime.UtcNow.Ticks);
+			//	this._InertiaTimer.Start();
+			//}
+		}
 
-		//private void _cancelDoubleTap()
-		//{
-		//    this._touchTapPointCurrent = null;
-		//    this._touchTapPointPrevious = null;
-		//}
+		private void _cancelDoubleTap()
+		{
+			this._touchTapPointCurrent = null;
+			this._touchTapPointPrevious = null;
+		}
 
 		//private void ProcessManipulators()
 		//{
@@ -775,15 +775,15 @@ namespace MapComplete.MapControl
 		//    }
 		//}
 
-		//private void StopInertia()
-		//{
-		//    if (this._InertiaProcessor.IsRunning)
-		//    {
-		//        this._InertiaProcessor.Complete(DateTime.UtcNow.Ticks);
-		//    }
-		//    this._velocity = default(Point);
-		//    this._InertiaTimer.Stop();
-		//}
+		private void StopInertia()
+		{
+			if (this._InertiaProcessor.IsRunning)
+			{
+				this._InertiaProcessor.Complete(DateTime.UtcNow.Ticks);
+			}
+			this._velocity = default(Point);
+			this._InertiaTimer.Stop();
+		}
 
 		//private void ZoomAboutViewportPoint(double zoomLevelIncrement, Point zoomTargetInViewport)
 		//{

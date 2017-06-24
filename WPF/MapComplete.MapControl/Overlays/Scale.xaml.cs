@@ -35,17 +35,17 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 
 		//private double _PreviousMaxWidth;
 
-		///// <summary>Identifies the <see cref="P:Microsoft.Maps.MapControl.WPF.Overlays.Scale.DistanceUnit"></see> dependency property.</summary>
-		//public readonly static DependencyProperty DistanceUnitProperty;
+		/// <summary>Identifies the <see cref="P:Microsoft.Maps.MapControl.WPF.Overlays.Scale.DistanceUnit"></see> dependency property.</summary>
+		public readonly static DependencyProperty DistanceUnitProperty;
 
 		/// <summary>Identifies the <see cref="P:Microsoft.Maps.MapControl.WPF.Overlays.Scale.Culture"></see> dependency property.</summary>
 		public readonly static DependencyProperty CultureProperty;
 
 		//private Microsoft.Maps.MapControl.WPF.Overlays.OverlayResources overlayResources;
 
-		//private readonly static int[] singleDigitValues;
+		private readonly static int[] singleDigitValues;
 
-		//private readonly static double[] multiDigitValues;
+		private readonly static double[] multiDigitValues;
 
 		/// <summary>Gets or sets the culture of the scale bar, which determines the language and default units used by the scale bar.</summary>
 		/// <returns>Returns <see cref="T:System.String"></see>.</returns>
@@ -61,19 +61,19 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 			}
 		}
 
-		///// <summary>Gets or sets the distance unit used by the scale bar.</summary>
-		///// <returns>Returns <see cref="T:Microsoft.Maps.MapControl.WPF.Overlays.DistanceUnit"></see>.</returns>
-		//public Microsoft.Maps.MapControl.WPF.Overlays.DistanceUnit DistanceUnit
-		//{
-		//	get
-		//	{
-		//		return (Microsoft.Maps.MapControl.WPF.Overlays.DistanceUnit)base.GetValue(Scale.DistanceUnitProperty);
-		//	}
-		//	set
-		//	{
-		//		base.SetValue(Scale.DistanceUnitProperty, value);
-		//	}
-		//}
+		/// <summary>Gets or sets the distance unit used by the scale bar.</summary>
+		/// <returns>Returns <see cref="T:Microsoft.Maps.MapControl.WPF.Overlays.DistanceUnit"></see>.</returns>
+		public DistanceUnit DistanceUnit
+		{
+			get
+			{
+				return (DistanceUnit)base.GetValue(Scale.DistanceUnitProperty);
+			}
+			set
+			{
+				base.SetValue(Scale.DistanceUnitProperty, value);
+			}
+		}
 
 		/// <summary>Gets or sets the meters per pixel to display on the scale bar.</summary>
 		/// <returns>Returns <see cref="T:System.Double"></see>.</returns>
@@ -90,6 +90,8 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 			}
 		}
 
+		public static PropertyChangedCallback OnUnitChanged { get; private set; }
+
 		//private Microsoft.Maps.MapControl.WPF.Overlays.OverlayResources OverlayResources
 		//{
 		//	get
@@ -104,7 +106,7 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 
 		//static Scale()
 		//{
-		//	Scale.DistanceUnitProperty = DependencyProperty.Register("DistanceUnit", typeof(Microsoft.Maps.MapControl.WPF.Overlays.DistanceUnit), typeof(Scale), new PropertyMetadata(new PropertyChangedCallback(Scale.OnUnitChanged)));
+		//	Scale.DistanceUnitProperty = DependencyProperty.Register("DistanceUnit", typeof(DistanceUnit), typeof(Scale), new PropertyMetadata(new PropertyChangedCallback(Scale.OnUnitChanged)));
 		//	Scale.CultureProperty = DependencyProperty.Register("Culture", typeof(string), typeof(Scale), new PropertyMetadata(new PropertyChangedCallback(Scale.OnCultureChanged)));
 		//	Scale.singleDigitValues = new int[] { 5, 2 };
 		//	Scale.multiDigitValues = new double[] { 5, 2.5, 2 };
@@ -158,28 +160,28 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 		//	return Scale.GetMultiDigitValue(num2, num1);
 		//}
 
-		//private static void OnCultureChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		//{
-		//	((Scale)d).OnCultureChanged();
-		//}
+		private static void OnCultureChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			((Scale)d).OnCultureChanged();
+		}
 
-		///// <summary>Enables derived classes to provide custom handling when the culture of the scale bar changes.</summary>
-		//protected virtual void OnCultureChanged()
-		//{
-		//	if (!string.IsNullOrEmpty(this.Culture))
-		//	{
-		//		this.regionInfo = ResourceUtility.GetRegionInfo(this.Culture);
-		//		this.cultureInfo = ResourceUtility.GetCultureInfo(this.Culture);
-		//		this.overlayResources = ResourceUtility.GetResource<Microsoft.Maps.MapControl.WPF.Overlays.OverlayResources, OverlayResourcesHelper>(this.Culture);
-		//	}
-		//	else
-		//	{
-		//		this.regionInfo = null;
-		//		this.cultureInfo = null;
-		//		this.overlayResources = ResourceUtility.GetResource<Microsoft.Maps.MapControl.WPF.Overlays.OverlayResources, OverlayResourcesHelper>(CultureInfo.CurrentUICulture.Name);
-		//	}
-		//	this.Refresh();
-		//}
+		/// <summary>Enables derived classes to provide custom handling when the culture of the scale bar changes.</summary>
+		protected virtual void OnCultureChanged()
+		{
+			//if (!string.IsNullOrEmpty(this.Culture))
+			//{
+			//	this.regionInfo = ResourceUtility.GetRegionInfo(this.Culture);
+			//	this.cultureInfo = ResourceUtility.GetCultureInfo(this.Culture);
+			//	this.overlayResources = ResourceUtility.GetResource<Microsoft.Maps.MapControl.WPF.Overlays.OverlayResources, OverlayResourcesHelper>(this.Culture);
+			//}
+			//else
+			//{
+			//	this.regionInfo = null;
+			//	this.cultureInfo = null;
+			//	this.overlayResources = ResourceUtility.GetResource<Microsoft.Maps.MapControl.WPF.Overlays.OverlayResources, OverlayResourcesHelper>(CultureInfo.CurrentUICulture.Name);
+			//}
+			this.Refresh();
+		}
 
 		/// <summary>Enables derived classes to provide custom handling when the <see cref="P:Microsoft.Maps.MapControl.Overlays.WPF.Scale.MetersPerPixel"></see> value of the scale bar changes.</summary>
 		protected virtual void OnPerPixelChanged()
@@ -198,13 +200,13 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 		//	this.Refresh();
 		//}
 
-		//private void Refresh()
-		//{
-		//	if (this._CurrentMetersPerPixel > 0)
-		//	{
-		//		this.SetScaling(this._CurrentMetersPerPixel);
-		//	}
-		//}
+		private void Refresh()
+		{
+			if (this._CurrentMetersPerPixel > 0)
+			{
+				this.SetScaling(this._CurrentMetersPerPixel);
+			}
+		}
 
 		private void Scale_LayoutUpdated(object sender, EventArgs e)
 		{

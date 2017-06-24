@@ -67,6 +67,8 @@
     <Compile Include="Design\MapModeConverter.cs" />
     <Compile Include="Design\MapModes.cs" />
     <Compile Include="Design\ShadowBrushConverter.cs" />
+    <Compile Include="MapItemsControl.cs" />
+    <Compile Include="Overlays\DistanceUnit.cs" />
     <Compile Include="ExceptionStrings.cs" />
     <Compile Include="IProjectable.cs" />
     <Compile Include="Location.cs" />
@@ -110,15 +112,14 @@
       <DependentUpon>Compass.xaml</DependentUpon>
     </Compile>
     <Compile Include="Overlays\MapForeground.cs" />
-    <Compile Include="Overlays\Scale.xaml.cs">
-      <DependentUpon>Scale.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Overlays\ShadowText.xaml.cs">
       <DependentUpon>ShadowText.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlatformServices\MapStyle.cs" />
     <Compile Include="Point2D.cs" />
     <Compile Include="Point3D.cs" />
+    <Compile Include="PositionOrigin.cs" />
+    <Compile Include="PositionOriginConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,6 +133,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Pushpin.cs" />
     <Compile Include="TileSource.cs" />
     <Compile Include="VisualEnumerable.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -151,11 +153,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Overlays\Scale.xaml">
+    <Page Include="Overlays\ShadowText.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Overlays\ShadowText.xaml">
+    <Page Include="themes\generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

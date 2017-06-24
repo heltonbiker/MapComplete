@@ -22,7 +22,7 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 
 		//private Collection<Copyright> _Copyrights;
 
-		private Collection<Scale> _Scales;
+		//private Collection<Scale> _Scales;
 
 		private Collection<Compass> _Compasses;
 
@@ -42,19 +42,24 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 
 		public MapForeground(Map map)
 		{
-		//	if (map == null)
-		//	{
-		//		throw new ArgumentNullException("map");
-		//	}
-		//	this._Logos = new Collection<Logo>();
-		//	this._Copyrights = new Collection<Copyright>();
-			this._Scales = new Collection<Scale>();
+			//	if (map == null)
+			//	{
+			//		throw new ArgumentNullException("map");
+			//	}
+			
+			//	this._Logos = new Collection<Logo>();
+			//	this._Copyrights = new Collection<Copyright>();
+
+			//	this._Scales = new Collection<Scale>();
 			this._Compasses = new Collection<Compass>();
 			this._Map = map;
+
 			this.AttachProperty();
-		//	this._Map.ModeChanged += new EventHandler<MapEventArgs>(this._Map_ModeChanged);
+		
+			//	this._Map.ModeChanged += new EventHandler<MapEventArgs>(this._Map_ModeChanged);
 		//	this._Map.ViewChangeStart += new EventHandler<MapEventArgs>(this._Map_ViewChangeStart);
 		//	this._Map.ViewChangeEnd += new EventHandler<MapEventArgs>(this._Map_ViewChangeEnd);
+
 		//	this._UpdateTimer = new DispatcherTimer(DispatcherPriority.Normal, base.Dispatcher)
 		//	{
 		//		Interval = TimeSpan.FromMilliseconds(500.0)
@@ -69,29 +74,29 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 
 		internal void AttachProperty()
 		{
-			if (this._Scales != null)
-			{
-				foreach (Scale current in this._Scales)
-				{
-					current.SetBinding(UIElement.VisibilityProperty, new Binding
-					{
-						Mode = BindingMode.TwoWay,
-						Source = this._Map,
-						Path = new PropertyPath("ScaleVisibility", new object[0])
-					});
-				}
-			}
+			//if (this._Scales != null)
+			//{
+			//	foreach (Scale current in this._Scales)
+			//	{
+			//		current.SetBinding(UIElement.VisibilityProperty, new Binding
+			//		{
+			//			Mode = BindingMode.TwoWay,
+			//			Source = this._Map,
+			//			Path = new PropertyPath("ScaleVisibility", new object[0])
+			//		});
+			//	}
+			//}
 		}
 
 		public override void OnApplyTemplate()
 		{
 			//this._Logos = new Collection<Logo>(this.GetVisualOfType<Logo>().ToList<Logo>());
 			//this._Copyrights = new Collection<Copyright>(this.GetVisualOfType<Copyright>().ToList<Copyright>());
-			this._Scales = new Collection<Scale>(this.GetVisualOfType<Scale>().ToList<Scale>());
-			foreach (Scale current in this._Scales)
-			{
-				current.Culture = this._Map.Culture;
-			}
+			//this._Scales = new Collection<Scale>(this.GetVisualOfType<Scale>().ToList<Scale>());
+			//foreach (Scale current in this._Scales)
+			//{
+			//	current.Culture = this._Map.Culture;
+			//}
 			this.AttachProperty();
 			this._Compasses = new Collection<Compass>(this.GetVisualOfType<Compass>().ToList<Compass>());
 			foreach (Compass current2 in this._Compasses)
@@ -201,10 +206,10 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 
 		private void UpdateScale()
 		{
-			foreach (Scale current in this._Scales)
-			{
-				current.MetersPerPixel = MercatorUtility.ZoomToScale(MapForeground.MercatorModeLogicalAreaSizeInScreenSpaceAtLevel1, this._Map.ZoomLevel, this._Map.Center);
-			}
+			//foreach (Scale current in this._Scales)
+			//{
+			//	current.MetersPerPixel = MercatorUtility.ZoomToScale(MapForeground.MercatorModeLogicalAreaSizeInScreenSpaceAtLevel1, this._Map.ZoomLevel, this._Map.Center);
+			//}
 		}
 
 		//private static IEnumerable<DependencyObject> GetDescendents(DependencyObject root)

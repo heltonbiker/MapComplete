@@ -24,7 +24,7 @@ namespace MapComplete
 			var window = new Window()
 			{
 				Title = "MapComplete",
-				DataContext = new Map()
+				Content = new Map()
 			};
 
 			MainWindow = window;

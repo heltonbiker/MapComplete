@@ -15,11 +15,11 @@ namespace Microsoft.Maps.MapControl.WPF
 
 		private Matrix3D _ViewportToNormalizedMercator;
 
-		//public static readonly DependencyProperty PositionProperty = DependencyProperty.RegisterAttached("Position", typeof(Location), typeof(MapLayer), new PropertyMetadata(new PropertyChangedCallback(MapLayer.OnPositionChanged)));
+		public static readonly DependencyProperty PositionProperty = DependencyProperty.RegisterAttached("Position", typeof(Location), typeof(MapLayer), new PropertyMetadata(new PropertyChangedCallback(MapLayer.OnPositionChanged)));
 
 		//public static readonly DependencyProperty PositionRectangleProperty = DependencyProperty.RegisterAttached("PositionRectangle", typeof(LocationRect), typeof(MapLayer), new PropertyMetadata(new PropertyChangedCallback(MapLayer.OnPositionRectangleChanged)));
 
-		//public static readonly DependencyProperty PositionOriginProperty = DependencyProperty.RegisterAttached("PositionOrigin", typeof(PositionOrigin), typeof(MapLayer), new PropertyMetadata(new PropertyChangedCallback(MapLayer.OnPositionOriginChanged)));
+		public static readonly DependencyProperty PositionOriginProperty = DependencyProperty.RegisterAttached("PositionOrigin", typeof(PositionOrigin), typeof(MapLayer), new PropertyMetadata(new PropertyChangedCallback(MapLayer.OnPositionOriginChanged)));
 
 		//public static readonly DependencyProperty PositionOffsetProperty = DependencyProperty.RegisterAttached("PositionOffset", typeof(Point), typeof(MapLayer), new PropertyMetadata(new PropertyChangedCallback(MapLayer.OnPositionOffsetChanged)));
 
@@ -65,15 +65,15 @@ namespace Microsoft.Maps.MapControl.WPF
 		//	return location;
 		//}
 
-		//public static void SetPosition(DependencyObject dependencyObject, Location location)
-		//{
-		//	dependencyObject.SetValue(MapLayer.PositionProperty, location);
-		//}
+		public static void SetPosition(DependencyObject dependencyObject, Location location)
+		{
+			dependencyObject.SetValue(MapLayer.PositionProperty, location);
+		}
 
-		//public static void OnPositionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs ea)
-		//{
-		//	MapLayer.InvalidateParentLayout(dependencyObject);
-		//}
+		public static void OnPositionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs ea)
+		{
+			MapLayer.InvalidateParentLayout(dependencyObject);
+		}
 
 		//public static LocationRect GetPositionRectangle(DependencyObject dependencyObject)
 		//{
@@ -113,15 +113,15 @@ namespace Microsoft.Maps.MapControl.WPF
 		//	return result;
 		//}
 
-		//public static void SetPositionOrigin(DependencyObject dependencyObject, PositionOrigin origin)
-		//{
-		//	dependencyObject.SetValue(MapLayer.PositionOriginProperty, origin);
-		//}
+		public static void SetPositionOrigin(DependencyObject dependencyObject, PositionOrigin origin)
+		{
+			dependencyObject.SetValue(MapLayer.PositionOriginProperty, origin);
+		}
 
-		//public static void OnPositionOriginChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs ea)
-		//{
-		//	MapLayer.InvalidateParentLayout(dependencyObject);
-		//}
+		public static void OnPositionOriginChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs ea)
+		{
+			MapLayer.InvalidateParentLayout(dependencyObject);
+		}
 
 		//public static Point GetPositionOffset(DependencyObject dependencyObject)
 		//{
@@ -242,25 +242,25 @@ namespace Microsoft.Maps.MapControl.WPF
 		//	base.OnVisualChildrenChanged(childAdded, childRemoved);
 		//}
 
-		//private static void InvalidateParentLayout(DependencyObject dependencyObject)
-		//{
-		//	FrameworkElement frameworkElement = dependencyObject as FrameworkElement;
-		//	if (frameworkElement != null)
-		//	{
-		//		MapLayer mapLayer = frameworkElement.Parent as MapLayer;
-		//		if (mapLayer == null)
-		//		{
-		//			ContentPresenter contentPresenter = frameworkElement.Parent as ContentPresenter;
-		//			if (contentPresenter != null)
-		//			{
-		//				mapLayer = (contentPresenter.Parent as MapLayer);
-		//			}
-		//		}
-		//		if (mapLayer != null)
-		//		{
-		//			mapLayer.InvalidateMeasure();
-		//		}
-		//	}
-		//}
+		private static void InvalidateParentLayout(DependencyObject dependencyObject)
+		{
+			FrameworkElement frameworkElement = dependencyObject as FrameworkElement;
+			if (frameworkElement != null)
+			{
+				MapLayer mapLayer = frameworkElement.Parent as MapLayer;
+				if (mapLayer == null)
+				{
+					ContentPresenter contentPresenter = frameworkElement.Parent as ContentPresenter;
+					if (contentPresenter != null)
+					{
+						mapLayer = (contentPresenter.Parent as MapLayer);
+					}
+				}
+				if (mapLayer != null)
+				{
+					mapLayer.InvalidateMeasure();
+				}
+			}
+		}
 	}
 }

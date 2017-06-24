@@ -1,4 +1,5 @@
 ﻿using MapComplete.MapControl;
+using Microsoft.Maps.MapControl.WPF.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,11 +22,11 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 
 		//private Collection<Copyright> _Copyrights;
 
-		//private Collection<Scale> _Scales;
+		private Collection<Scale> _Scales;
 
-		//private Collection<Compass> _Compasses;
+		private Collection<Compass> _Compasses;
 
-		//private bool _TemplateApplied;
+		private bool _TemplateApplied;
 
 		//private DispatcherTimer _UpdateTimer;
 
@@ -47,10 +48,10 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 		//	}
 		//	this._Logos = new Collection<Logo>();
 		//	this._Copyrights = new Collection<Copyright>();
-		//	this._Scales = new Collection<Scale>();
-		//	this._Compasses = new Collection<Compass>();
+			this._Scales = new Collection<Scale>();
+			this._Compasses = new Collection<Compass>();
 			this._Map = map;
-		//	this.AttachProperty();
+			this.AttachProperty();
 		//	this._Map.ModeChanged += new EventHandler<MapEventArgs>(this._Map_ModeChanged);
 		//	this._Map.ViewChangeStart += new EventHandler<MapEventArgs>(this._Map_ViewChangeStart);
 		//	this._Map.ViewChangeEnd += new EventHandler<MapEventArgs>(this._Map_ViewChangeEnd);
@@ -66,59 +67,59 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 		//	this._copyrightUpdateTimer.Tick += new EventHandler(this.CopyrightUpdateTimerTick);
 		}
 
-		//internal void AttachProperty()
-		//{
-		//	if (this._Scales != null)
-		//	{
-		//		foreach (Scale current in this._Scales)
-		//		{
-		//			current.SetBinding(UIElement.VisibilityProperty, new Binding
-		//			{
-		//				Mode = BindingMode.TwoWay,
-		//				Source = this._Map,
-		//				Path = new PropertyPath("ScaleVisibility", new object[0])
-		//			});
-		//		}
-		//	}
-		//}
+		internal void AttachProperty()
+		{
+			if (this._Scales != null)
+			{
+				foreach (Scale current in this._Scales)
+				{
+					current.SetBinding(UIElement.VisibilityProperty, new Binding
+					{
+						Mode = BindingMode.TwoWay,
+						Source = this._Map,
+						Path = new PropertyPath("ScaleVisibility", new object[0])
+					});
+				}
+			}
+		}
 
-		//public override void OnApplyTemplate()
-		//{
-		//	this._Logos = new Collection<Logo>(this.GetVisualOfType<Logo>().ToList<Logo>());
-		//	this._Copyrights = new Collection<Copyright>(this.GetVisualOfType<Copyright>().ToList<Copyright>());
-		//	this._Scales = new Collection<Scale>(this.GetVisualOfType<Scale>().ToList<Scale>());
-		//	foreach (Scale current in this._Scales)
-		//	{
-		//		current.Culture = this._Map.Culture;
-		//	}
-		//	this.AttachProperty();
-		//	this._Compasses = new Collection<Compass>(this.GetVisualOfType<Compass>().ToList<Compass>());
-		//	foreach (Compass current2 in this._Compasses)
-		//	{
-		//		current2.SetBinding(Compass.HeadingProperty, new Binding
-		//		{
-		//			Source = this._Map,
-		//			Path = new PropertyPath(MapCore.HeadingProperty)
-		//		});
-		//	}
-		//	this._TemplateApplied = true;
-		//	this.RefreshMapMode();
-		//}
+		public override void OnApplyTemplate()
+		{
+			//this._Logos = new Collection<Logo>(this.GetVisualOfType<Logo>().ToList<Logo>());
+			//this._Copyrights = new Collection<Copyright>(this.GetVisualOfType<Copyright>().ToList<Copyright>());
+			this._Scales = new Collection<Scale>(this.GetVisualOfType<Scale>().ToList<Scale>());
+			foreach (Scale current in this._Scales)
+			{
+				current.Culture = this._Map.Culture;
+			}
+			this.AttachProperty();
+			this._Compasses = new Collection<Compass>(this.GetVisualOfType<Compass>().ToList<Compass>());
+			foreach (Compass current2 in this._Compasses)
+			{
+				current2.SetBinding(Compass.HeadingProperty, new Binding
+				{
+					Source = this._Map,
+					Path = new PropertyPath(MapCore.HeadingProperty)
+				});
+			}
+			this._TemplateApplied = true;
+			this.RefreshMapMode();
+		}
 
 		//private void _Map_ModeChanged(object sender, MapEventArgs e)
 		//{
 		//	this.RefreshMapMode();
 		//}
 
-		//private void RefreshMapMode()
-		//{
-		//	if (this._TemplateApplied && this._Map.Mode != null)
-		//	{
-		//		this._copyrightUpdateTimer.Stop();
-		//		this._copyrightUpdateTimer.Start();
-		//		this.UpdateScale();
-		//	}
-		//}
+		private void RefreshMapMode()
+		{
+			if (this._TemplateApplied && this._Map.Mode != null)
+			{
+				//this._copyrightUpdateTimer.Stop();
+				//this._copyrightUpdateTimer.Start();
+				this.UpdateScale();
+			}
+		}
 
 		//private void _UpdateTimer_Tick(object sender, EventArgs e)
 		//{
@@ -198,13 +199,13 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 		//	}
 		//}
 
-		//private void UpdateScale()
-		//{
-		//	foreach (Scale current in this._Scales)
-		//	{
-		//		current.MetersPerPixel = MercatorUtility.ZoomToScale(MapForeground.MercatorModeLogicalAreaSizeInScreenSpaceAtLevel1, this._Map.ZoomLevel, this._Map.Center);
-		//	}
-		//}
+		private void UpdateScale()
+		{
+			foreach (Scale current in this._Scales)
+			{
+				current.MetersPerPixel = MercatorUtility.ZoomToScale(MapForeground.MercatorModeLogicalAreaSizeInScreenSpaceAtLevel1, this._Map.ZoomLevel, this._Map.Center);
+			}
+		}
 
 		//private static IEnumerable<DependencyObject> GetDescendents(DependencyObject root)
 		//{

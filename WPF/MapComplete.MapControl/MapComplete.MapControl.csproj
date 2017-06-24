@@ -56,13 +56,17 @@
     <Compile Include="Core\MapConfiguration.cs" />
     <Compile Include="Core\MapConfigurationFromFile.cs" />
     <Compile Include="Core\MapConfigurationFromWeb.cs" />
+    <Compile Include="Core\MapConfigurationGetSectionRequest.cs" />
     <Compile Include="Core\MapConfigurationLoadedEventArgs.cs" />
     <Compile Include="Core\MapConfigurationProvider.cs" />
     <Compile Include="Core\MapConfigurationSection.cs" />
+    <Compile Include="Core\MercatorUtility.cs" />
+    <Compile Include="Core\ModeBackground.cs" />
     <Compile Include="Core\QuadKey.cs" />
     <Compile Include="CriticallyDampedSpring.cs" />
     <Compile Include="Design\MapModeConverter.cs" />
     <Compile Include="Design\MapModes.cs" />
+    <Compile Include="Design\ShadowBrushConverter.cs" />
     <Compile Include="ExceptionStrings.cs" />
     <Compile Include="IProjectable.cs" />
     <Compile Include="Location.cs" />
@@ -102,7 +106,16 @@
     <Compile Include="MapLayer.cs" />
     <Compile Include="MapMode.cs" />
     <Compile Include="MercatorCube.cs" />
+    <Compile Include="Overlays\Compass.xaml.cs">
+      <DependentUpon>Compass.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Overlays\MapForeground.cs" />
+    <Compile Include="Overlays\Scale.xaml.cs">
+      <DependentUpon>Scale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Overlays\ShadowText.xaml.cs">
+      <DependentUpon>ShadowText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PlatformServices\MapStyle.cs" />
     <Compile Include="Point2D.cs" />
     <Compile Include="Point3D.cs" />
@@ -120,6 +133,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TileSource.cs" />
+    <Compile Include="VisualEnumerable.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -130,7 +144,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Core\Microsoft.Maps.MapControl.WPF.Data.DesignConfig.xml" />
+    <EmbeddedResource Include="DesignConfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Overlays\Compass.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Overlays\Scale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Overlays\ShadowText.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

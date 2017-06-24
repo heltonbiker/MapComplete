@@ -251,11 +251,11 @@ namespace MapComplete.MapControl
 			}
 		}
 
-		//public static int LoggingDelay
-		//{
-		//    get;
-		//    set;
-		//}
+		public static int LoggingDelay
+		{
+			get;
+			set;
+		}
 
 		///// <summary>Gets or sets the map foreground style.</summary>
 		///// <returns>Returns <see cref="T:System.Windows.Style"></see>.</returns>

@@ -35,8 +35,16 @@
 				ResizeDirection="Columns"
 				Width="5" Grid.Column="1"
 				Background="{StaticResource BackgroundLightGray}"/>
-		</Grid>
 
-		<TreeView x:Name="ObjectGraph" Grid.Column="0" ItemsSource="{Binding ObjectGraph}"/>
+			<Grid Grid.Column="0" x:Name="LeftPanel">
+				<TreeView 
+					x:Name="ObjectGraph"
+					ItemsSource="{Binding ObjectGraph}"/>
+			</Grid>
+
+			<Grid x:Name="RightPanel" Grid.Column="2">
+
+			</Grid>
+		</Grid>
 	</DockPanel>
 </Window>

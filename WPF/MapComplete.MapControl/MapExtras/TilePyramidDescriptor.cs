@@ -19,7 +19,7 @@ namespace Microsoft.Maps.MapExtras
 
 		private int tileHeight;
 
-		private Point2D[] vertices;
+		private Point2D[] vertices = new Point2D[0];
 
 		private double polygonCrossProductZ;
 

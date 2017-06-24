@@ -189,40 +189,40 @@ namespace Microsoft.Maps.MapControl.WPF.Core
 
 		private void ConfigLoaded(string requestKey, Dictionary<string, MapConfigurationSection> sections)
 		{
-		//	List<MapConfigurationGetSectionRequest> list = new List<MapConfigurationGetSectionRequest>();
-		//	lock (this.configLock)
-		//	{
-		//		foreach (string current in sections.Keys)
-		//		{
-		//			base.Sections[current] = sections[current];
-		//		}
-		//		if (!this.requestedSections.Contains(requestKey))
-		//		{
-		//			this.requestedSections.Add(requestKey);
-		//		}
-		//		if (this.requestQueue.ContainsKey(requestKey))
-		//		{
-		//			foreach (MapConfigurationGetSectionRequest current2 in this.requestQueue[requestKey])
-		//			{
-		//				list.Add(current2);
-		//			}
-		//		}
-		//	}
-		//	if (this.Loaded != null)
-		//	{
-		//		this.Loaded(this, new MapConfigurationLoadedEventArgs(null));
-		//	}
-		//	foreach (MapConfigurationGetSectionRequest current3 in list)
-		//	{
-		//		if (current3.Callback != null)
-		//		{
-		//			current3.CallbackDispatcher.BeginInvoke(current3.Callback, new object[]
-		//			{
-		//				base.GetSection(current3.Version, current3.SectionName, current3.Culture),
-		//				current3.UserState
-		//			});
-		//		}
-		//	}
+			List<MapConfigurationGetSectionRequest> list = new List<MapConfigurationGetSectionRequest>();
+			lock (this.configLock)
+			{
+				foreach (string current in sections.Keys)
+				{
+					base.Sections[current] = sections[current];
+				}
+				if (!this.requestedSections.Contains(requestKey))
+				{
+					this.requestedSections.Add(requestKey);
+				}
+				if (this.requestQueue.ContainsKey(requestKey))
+				{
+					foreach (MapConfigurationGetSectionRequest current2 in this.requestQueue[requestKey])
+					{
+						list.Add(current2);
+					}
+				}
+			}
+			if (this.Loaded != null)
+			{
+				this.Loaded(this, new MapConfigurationLoadedEventArgs(null));
+			}
+			foreach (MapConfigurationGetSectionRequest current3 in list)
+			{
+				if (current3.Callback != null)
+				{
+					current3.CallbackDispatcher.BeginInvoke(current3.Callback, new object[]
+					{
+						base.GetSection(current3.Version, current3.SectionName, current3.Culture),
+						current3.UserState
+					});
+				}
+			}
 		}
 
 		private IsolatedStorageFileStream GetIsolatedStorageFileStream(string requestKey, FileMode mode)

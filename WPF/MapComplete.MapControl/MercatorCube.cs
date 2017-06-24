@@ -32,17 +32,17 @@ namespace Microsoft.Maps.MapExtras
 		//{
 		//}
 
-		//public override Location ToLocation(Point3D vector)
-		//{
-		//	double latitude = this.YToLatitude(vector.Y);
-		//	return new Location(latitude, (vector.X - 0.5) * 360.0, this.VectorDistanceToMetersAtLatitude(latitude, vector.Z), AltitudeReference.Ellipsoid);
-		//}
+		public override Location ToLocation(Point3D vector)
+		{
+			double latitude = this.YToLatitude(vector.Y);
+			return new Location(latitude, (vector.X - 0.5) * 360.0, this.VectorDistanceToMetersAtLatitude(latitude, vector.Z), AltitudeReference.Ellipsoid);
+		}
 
-		//public override Location ToLocation(Point3D vector, Point3D wrappingCenter)
-		//{
-		//	vector.X = MercatorCube.WrapX(vector.X, wrappingCenter.X);
-		//	return this.ToLocation(vector);
-		//}
+		public override Location ToLocation(Point3D vector, Point3D wrappingCenter)
+		{
+			vector.X = MercatorCube.WrapX(vector.X, wrappingCenter.X);
+			return this.ToLocation(vector);
+		}
 
 		public override Point3D FromLocation(Location location)
 		{
@@ -87,14 +87,14 @@ namespace Microsoft.Maps.MapExtras
 		//	return this.MetersToVectorDistanceAtLatitude(latitude, meters);
 		//}
 
-		//public double VectorDistanceToMetersAtLatitude(double latitude, double distance)
-		//{
-		//	if (Math.Abs(distance) <= 4.94065645841247E-324)
-		//	{
-		//		return 0.0;
-		//	}
-		//	return distance * Math.Cos(latitude * 0.017453292519943295) / 2.4953202336653371E-08;
-		//}
+		public double VectorDistanceToMetersAtLatitude(double latitude, double distance)
+		{
+			if (Math.Abs(distance) <= 4.94065645841247E-324)
+			{
+				return 0.0;
+			}
+			return distance * Math.Cos(latitude * 0.017453292519943295) / 2.4953202336653371E-08;
+		}
 
 		public double MetersToVectorDistanceAtLatitude(double latitude, double meters)
 		{
@@ -105,10 +105,10 @@ namespace Microsoft.Maps.MapExtras
 			return meters * 2.4953202336653371E-08 / Math.Cos(latitude * 0.017453292519943295);
 		}
 
-		//public double YToLatitude(double y)
-		//{
-		//	return 90.0 - 2.0 * Math.Atan(Math.Exp((y * 2.0 - 1.0) * 3.1415926535897931)) * 57.295779513082323;
-		//}
+		public double YToLatitude(double y)
+		{
+			return 90.0 - 2.0 * Math.Atan(Math.Exp((y * 2.0 - 1.0) * 3.1415926535897931)) * 57.295779513082323;
+		}
 
 		public double LatitudeToY(double latitude)
 		{

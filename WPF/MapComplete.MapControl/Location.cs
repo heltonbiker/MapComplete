@@ -90,22 +90,22 @@ namespace Microsoft.Maps.MapControl.WPF
 			this.altitudeReference = altitudeReference;
 		}
 
-		//public Location(Location location)
-		//{
-		//	this.Latitude = location.latitude;
-		//	this.Longitude = location.Longitude;
-		//	this.Altitude = location.Altitude;
-		//	this.AltitudeReference = location.AltitudeReference;
-		//}
+		public Location(Location location)
+		{
+			this.Latitude = location.latitude;
+			this.Longitude = location.Longitude;
+			this.Altitude = location.Altitude;
+			this.AltitudeReference = location.AltitudeReference;
+		}
 
-		//public static double NormalizeLongitude(double longitude)
-		//{
-		//	if (longitude < -180.0 || longitude > 180.0)
-		//	{
-		//		return longitude - Math.Floor((longitude + 180.0) / 360.0) * 360.0;
-		//	}
-		//	return longitude;
-		//}
+		public static double NormalizeLongitude(double longitude)
+		{
+			if (longitude < -180.0 || longitude > 180.0)
+			{
+				return longitude - Math.Floor((longitude + 180.0) / 360.0) * 360.0;
+			}
+			return longitude;
+		}
 
 		//public static bool operator ==(Location location1, Location location2)
 		//{

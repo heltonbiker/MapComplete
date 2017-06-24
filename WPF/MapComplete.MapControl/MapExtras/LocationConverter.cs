@@ -15,12 +15,12 @@ namespace Microsoft.Maps.MapExtras
 		//	get;
 		//}
 
-		//public abstract Location ToLocation(Point3D vector);
+		public abstract Location ToLocation(Point3D vector);
 
-		//public virtual Location ToLocation(Point3D vector, Point3D wrappingCenter)
-		//{
-		//	return this.ToLocation(vector);
-		//}
+		public virtual Location ToLocation(Point3D vector, Point3D wrappingCenter)
+		{
+			return this.ToLocation(vector);
+		}
 
 		public abstract Point3D FromLocation(Location location);
 

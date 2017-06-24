@@ -30,7 +30,7 @@ namespace Microsoft.Maps.MapControl.WPF
 
 		private string _SessionId;
 
-		//private Canvas _TilePyramidRenderableCanvas;
+		private Canvas _TilePyramidRenderableCanvas;
 
 		private MapExtras.TileSource _TileSource;
 
@@ -145,25 +145,25 @@ namespace Microsoft.Maps.MapControl.WPF
 		protected MapMode()
 		{
 			this._TileWrap = TileWrap.None;
-		//	base.SizeChanged += new SizeChangedEventHandler(this.MapMode_SizeChanged);
-		//	this._TilePyramidRenderableCanvas = new Canvas();
-		//	base.Children.Add(this._TilePyramidRenderableCanvas);
-		//	this._TilePyramidRenderable = new TilePyramidRenderable(this._TilePyramidRenderableCanvas);
-		//	this._TilePyramidRenderable.NeedsRender += new EventHandler(this._TilePyramidRenderable_NeedsRender);
+			base.SizeChanged += new SizeChangedEventHandler(this.MapMode_SizeChanged);
+			this._TilePyramidRenderableCanvas = new Canvas();
+			base.Children.Add(this._TilePyramidRenderableCanvas);
+			this._TilePyramidRenderable = new TilePyramidRenderable(this._TilePyramidRenderableCanvas);
+			this._TilePyramidRenderable.NeedsRender += new EventHandler(this._TilePyramidRenderable_NeedsRender);
 		}
 
 		void IProjectable.SetView(Size viewportSize, Matrix3D normalizedMercatorToViewport, Matrix3D viewportToNormalizedMercator)
 		{
-		//	if (this._TileSource != null)
-		//	{
-		//		this.SetViewImpl(viewportSize, normalizedMercatorToViewport, viewportToNormalizedMercator);
-		//		return;
-		//	}
-		//	MapMode.SetViewParams setViewParams = new MapMode.SetViewParams();
-		//	setViewParams.ViewportSize = viewportSize;
-		//	setViewParams.NormalizedMercatorToViewport = normalizedMercatorToViewport;
-		//	setViewParams.ViewportToNormalizedMercator = viewportToNormalizedMercator;
-		//	MapConfiguration.GetSection("v1", "Services", this.Culture, this.SessionId, new MapConfigurationCallback(this.AsynchronousConfigurationLoadedSetViewCallback), false, setViewParams);
+			if (this._TileSource != null)
+			{
+				this.SetViewImpl(viewportSize, normalizedMercatorToViewport, viewportToNormalizedMercator);
+				return;
+			}
+			MapMode.SetViewParams setViewParams = new MapMode.SetViewParams();
+			setViewParams.ViewportSize = viewportSize;
+			setViewParams.NormalizedMercatorToViewport = normalizedMercatorToViewport;
+			setViewParams.ViewportToNormalizedMercator = viewportToNormalizedMercator;
+			MapConfiguration.GetSection("v1", "Services", this.Culture, this.SessionId, new MapConfigurationCallback(this.AsynchronousConfigurationLoadedSetViewCallback), false, setViewParams);
 		}
 
 		private void AsynchronousConfigurationLoadedSetViewCallback(MapConfigurationSection config, object userState)
@@ -178,16 +178,16 @@ namespace Microsoft.Maps.MapControl.WPF
 
 		private void SetViewImpl(Size viewportSize, Matrix3D normalizedMercatorToViewport, Matrix3D viewportToNormalizedMercator)
 		{
-			//if (this.TileWrap == TileWrap.None)
-			//{
-			//	this._TilePyramidRenderable.NormalizedTilePyramidToToViewportTransform = normalizedMercatorToViewport;
-			//	return;
-			//}
-			//int num = 16;
-			//bool flag = this.TileWrap == TileWrap.Horizontal || this.TileWrap == TileWrap.Both;
-			//bool flag2 = this.TileWrap == TileWrap.Vertical || this.TileWrap == TileWrap.Both;
-			//Matrix3D matrix = VectorMath.ScalingMatrix3D((double)num, (double)num, 1.0) * VectorMath.TranslationMatrix3D((double)(flag ? (-(double)num / 2) : 0), (double)(flag2 ? (-(double)num / 2) : 0), 0.0);
-			//this._TilePyramidRenderable.NormalizedTilePyramidToToViewportTransform = matrix * normalizedMercatorToViewport;
+			if (this.TileWrap == TileWrap.None)
+			{
+				this._TilePyramidRenderable.NormalizedTilePyramidToToViewportTransform = normalizedMercatorToViewport;
+				return;
+			}
+			int num = 16;
+			bool flag = this.TileWrap == TileWrap.Horizontal || this.TileWrap == TileWrap.Both;
+			bool flag2 = this.TileWrap == TileWrap.Vertical || this.TileWrap == TileWrap.Both;
+			Matrix3D matrix = VectorMath.ScalingMatrix3D((double)num, (double)num, 1.0) * VectorMath.TranslationMatrix3D((double)(flag ? (-(double)num / 2) : 0), (double)(flag2 ? (-(double)num / 2) : 0), 0.0);
+			this._TilePyramidRenderable.NormalizedTilePyramidToToViewportTransform = matrix * normalizedMercatorToViewport;
 		}
 
 		internal abstract void AsynchronousConfigurationLoaded(MapConfigurationSection config, object userState);
@@ -199,12 +199,12 @@ namespace Microsoft.Maps.MapControl.WPF
 			this._TilePyramidRenderable = null;
 		}
 
-		//protected override Size ArrangeOverride(Size arrangeSize)
-		//{
-		//	Size result = base.ArrangeOverride(arrangeSize);
-		//	this.InternalRender();
-		//	return result;
-		//}
+		protected override Size ArrangeOverride(Size arrangeSize)
+		{
+			Size result = base.ArrangeOverride(arrangeSize);
+			this.InternalRender();
+			return result;
+		}
 
 		private void EnsureTileSource()
 		{
@@ -252,10 +252,10 @@ namespace Microsoft.Maps.MapControl.WPF
 			this._TilePyramidRenderable.TileSource = this._TileSource;
 		}
 
-		//private void MapMode_SizeChanged(object sender, SizeChangedEventArgs e)
-		//{
-		//	this.InternalRender();
-		//}
+		private void MapMode_SizeChanged(object sender, SizeChangedEventArgs e)
+		{
+			this.InternalRender();
+		}
 
 		private void _TilePyramidRenderable_NeedsRender(object sender, EventArgs e)
 		{

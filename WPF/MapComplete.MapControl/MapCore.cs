@@ -1,6 +1,7 @@
 ﻿//using Microsoft.Maps.MapControl.WPF.Core;
 //using Microsoft.Maps.MapControl.WPF.Design;
 //using Microsoft.Maps.MapExtras;
+using Microsoft.Maps.MapControl.WPF.Core;
 using Microsoft.Maps.MapControl.WPF.Design;
 using Microsoft.Maps.MapExtras;
 using System;
@@ -107,11 +108,11 @@ namespace Microsoft.Maps.MapControl.WPF
 		//    /// <summary>Occurs when the view towards which the map is animating changes.</summary>
 		//    public event EventHandler<MapEventArgs> TargetViewChanged;
 
-		//    /// <summary>Occurs when the view starts changing.</summary>
-		//    public event EventHandler<MapEventArgs> ViewChangeStart;
+		/// <summary>Occurs when the view starts changing.</summary>
+		public event EventHandler<MapEventArgs> ViewChangeStart;
 
-		//    /// <summary>Occurs when the view is done changing.</summary>
-		//    public event EventHandler<MapEventArgs> ViewChangeEnd;
+		/// <summary>Occurs when the view is done changing.</summary>
+		public event EventHandler<MapEventArgs> ViewChangeEnd;
 
 		public event EventHandler<MapEventArgs> ModeChanged;
 
@@ -217,15 +218,15 @@ namespace Microsoft.Maps.MapControl.WPF
 			}
 		}
 
-		//    /// <summary>Gets the child elements of the map.</summary>
-		//    /// <returns>Returns <see cref="T:System.Windows.Controls.UIElementCollection"></see>.</returns>
-		//    public UIElementCollection Children
-		//    {
-		//        get
-		//        {
-		//            return this._MapUserLayerContainer.Children;
-		//        }
-		//    }
+		/// <summary>Gets the child elements of the map.</summary>
+		/// <returns>Returns <see cref="T:System.Windows.Controls.UIElementCollection"></see>.</returns>
+		public UIElementCollection Children
+		{
+			get
+			{
+				return this._MapUserLayerContainer.Children;
+			}
+		}
 
 		/// <summary>Gets or sets the map mode.</summary>
 		/// <returns>Returns <see cref="T:Microsoft.Maps.MapControl.WPF.MapMode"></see>.</returns>
@@ -402,26 +403,26 @@ namespace Microsoft.Maps.MapControl.WPF
 		    this._CenterNormalizedMercatorSpringY = new CriticallyDampedSpring();
 		    this._CenterNormalizedMercatorSpringY.SnapToValue(point.Y);
 
-		//        MapCore._NormalizedMercatorToViewport_TranslatePre = Matrix3D.Identity;
-		//        MapCore._NormalizedMercatorToViewport_Scale = Matrix3D.Identity;
-		//        MapCore._NormalizedMercatorToViewport_Rotate = Matrix3D.Identity;
-		//        MapCore._NormalizedMercatorToViewport_TranslatePost = Matrix3D.Identity;
+			//        MapCore._NormalizedMercatorToViewport_TranslatePre = Matrix3D.Identity;
+			//        MapCore._NormalizedMercatorToViewport_Scale = Matrix3D.Identity;
+			//        MapCore._NormalizedMercatorToViewport_Rotate = Matrix3D.Identity;
+			//        MapCore._NormalizedMercatorToViewport_TranslatePost = Matrix3D.Identity;
 
-		//        this.ModeCrossFadeDuration = new Duration(TimeSpan.FromMilliseconds(500.0));
-		//        this._CurrentMapModeTransitionTimeout = new Timer(4000.0);
-		//        this._CurrentMapModeTransitionTimeout.AutoReset = false;
-		//        this._CurrentMapModeTransitionTimeout.Elapsed += new ElapsedEventHandler(this._CurrentMapModeTransitionTimeout_Elapsed);
+			//        this.ModeCrossFadeDuration = new Duration(TimeSpan.FromMilliseconds(500.0));
+			//        this._CurrentMapModeTransitionTimeout = new Timer(4000.0);
+			//        this._CurrentMapModeTransitionTimeout.AutoReset = false;
+			//        this._CurrentMapModeTransitionTimeout.Elapsed += new ElapsedEventHandler(this._CurrentMapModeTransitionTimeout_Elapsed);
 
-		//        this._ModeSwitchAnationDriver = new AnimationDriver();
-		//        this._ModeSwitchAnationDriver.AnimationProgressChanged += new EventHandler(this._ModeSwitchAnationDriver_AnimationProgressChanged);
-		//        this._ModeSwitchAnationDriver.AnimationCompleted += new EventHandler(this._ModeSwitchAnationDriver_AnimationCompleted);
+			//        this._ModeSwitchAnationDriver = new AnimationDriver();
+			//        this._ModeSwitchAnationDriver.AnimationProgressChanged += new EventHandler(this._ModeSwitchAnationDriver_AnimationProgressChanged);
+			//        this._ModeSwitchAnationDriver.AnimationCompleted += new EventHandler(this._ModeSwitchAnationDriver_AnimationCompleted);
 
-		//        base.Loaded += new RoutedEventHandler(this.MapCore_Loaded);
+			base.Loaded += new RoutedEventHandler(this.MapCore_Loaded);
 
-		//        this._UserInputTimeout = new DispatcherTimer();
-		//        this._UserInputTimeout.Interval = new TimeSpan(0, 0, 0, 0, 100);
+			//        this._UserInputTimeout = new DispatcherTimer();
+			//        this._UserInputTimeout.Interval = new TimeSpan(0, 0, 0, 0, 100);
 
-		        this.UpdateView();
+			this.UpdateView();
 		}
 
 		/// <summary>When overridden in a derived class, is invoked whenever application code or internal processes call ApplyTemplatehttp://msdn.microsoft.com/en-us/library/system.windows.frameworkelement.applytemplate.aspx</summary>
@@ -551,18 +552,18 @@ namespace Microsoft.Maps.MapControl.WPF
 
 		private void UpdateCulture()
 		{
-			//MapConfiguration.GetSection("v1", "Services", this.Culture, null, new MapConfigurationCallback(this.AsynchronousConfigurationLoaded), true);
+			MapConfiguration.GetSection("v1", "Services", this.Culture, null, new MapConfigurationCallback(this.AsynchronousConfigurationLoaded), true);
 		}
 
-		//private void AsynchronousConfigurationLoaded(MapConfigurationSection config, object userState)
-		//{
-		//	if (this.Mode != null)
-		//	{
-		//		this.Mode.Culture = this.Culture;
-		//		this.Mode.SessionId = this.Mode.SessionId;
-		//		this.UpdateView();
-		//	}
-		//}
+		private void AsynchronousConfigurationLoaded(MapConfigurationSection config, object userState)
+		{
+			if (this.Mode != null)
+			{
+				this.Mode.Culture = this.Culture;
+				this.Mode.SessionId = this.Mode.SessionId;
+				this.UpdateView();
+			}
+		}
 
 		private void UpdateMapMode()
 		{
@@ -843,17 +844,17 @@ namespace Microsoft.Maps.MapControl.WPF
 		private void CalculateNormalizedMercatorToViewportMapping(Size viewportSize, Point centerNormalizedMercator, double heading, double zoomLevel, bool applyWorldWrap, ref Matrix3D normalizedMercatorToViewport, ref Matrix3D viewportToNormalizedMercator)
 		    {
 		        Point point = applyWorldWrap ? this.ApplyWorldWrap(centerNormalizedMercator) : centerNormalizedMercator;
-		//        MapCore._NormalizedMercatorToViewport_TranslatePre.OffsetX = -point.X;
-		//        MapCore._NormalizedMercatorToViewport_TranslatePre.OffsetY = -point.Y;
-		//        double num = 256.0 * Math.Pow(2.0, zoomLevel);
-		//        MapCore._NormalizedMercatorToViewport_Scale.M11 = num;
-		//        MapCore._NormalizedMercatorToViewport_Scale.M22 = num;
-		//        MapCore._NormalizedMercatorToViewport_Rotate = VectorMath.RotationMatrix3DZ(3.1415926535897931 * heading / 180.0);
-		//        MapCore._NormalizedMercatorToViewport_TranslatePost.OffsetX = viewportSize.Width / 2.0;
-		//        MapCore._NormalizedMercatorToViewport_TranslatePost.OffsetY = viewportSize.Height / 2.0;
-		//        normalizedMercatorToViewport = MapCore._NormalizedMercatorToViewport_TranslatePre * MapCore._NormalizedMercatorToViewport_Scale * MapCore._NormalizedMercatorToViewport_Rotate * MapCore._NormalizedMercatorToViewport_TranslatePost;
-		//        viewportToNormalizedMercator = normalizedMercatorToViewport;
-		//        viewportToNormalizedMercator.Invert();
+		        MapCore._NormalizedMercatorToViewport_TranslatePre.OffsetX = -point.X;
+		        MapCore._NormalizedMercatorToViewport_TranslatePre.OffsetY = -point.Y;
+		        double num = 256.0 * Math.Pow(2.0, zoomLevel);
+		        MapCore._NormalizedMercatorToViewport_Scale.M11 = num;
+		        MapCore._NormalizedMercatorToViewport_Scale.M22 = num;
+		        MapCore._NormalizedMercatorToViewport_Rotate = VectorMath.RotationMatrix3DZ(3.1415926535897931 * heading / 180.0);
+		        MapCore._NormalizedMercatorToViewport_TranslatePost.OffsetX = viewportSize.Width / 2.0;
+		        MapCore._NormalizedMercatorToViewport_TranslatePost.OffsetY = viewportSize.Height / 2.0;
+		        normalizedMercatorToViewport = MapCore._NormalizedMercatorToViewport_TranslatePre * MapCore._NormalizedMercatorToViewport_Scale * MapCore._NormalizedMercatorToViewport_Rotate * MapCore._NormalizedMercatorToViewport_TranslatePost;
+		        viewportToNormalizedMercator = normalizedMercatorToViewport;
+		        viewportToNormalizedMercator.Invert();
 		    }
 
 		private Point ApplyWorldWrap(Point normalizedMercator)
@@ -886,26 +887,26 @@ namespace Microsoft.Maps.MapControl.WPF
 		        current.CurrentMapCopyInstance = new Point(Math.Floor(this._CenterNormalizedMercatorSpringX.CurrentValue), Math.Floor(this._CenterNormalizedMercatorSpringY.CurrentValue));
 		        ((IProjectable)current).SetView(viewportSize, identity, identity2);
 		    }
-		//    ((IProjectable)this._MapUserLayerContainer).SetView(viewportSize, identity, identity2);
-		//    foreach (object current2 in this.Children)
-		//    {
-		//        IProjectable projectable = current2 as IProjectable;
-		//        if (projectable != null)
-		//        {
-		//            projectable.SetView(viewportSize, identity, identity2);
-		//        }
-		//    }
-		//    this.UpdateViewDependencyProperties();
-		    }
+			((IProjectable)this._MapUserLayerContainer).SetView(viewportSize, identity, identity2);
+			foreach (object current2 in this.Children)
+			{
+				IProjectable projectable = current2 as IProjectable;
+				if (projectable != null)
+				{
+					projectable.SetView(viewportSize, identity, identity2);
+				}
+			}
+			this.UpdateViewDependencyProperties();
+		}
 
-		//    private void UpdateViewDependencyProperties()
-		//    {
-		//        this._ViewUpdatingInternally = true;
-		//        this.ZoomLevel = this._ZoomLevelSpring.CurrentValue;
-		//        this.Heading = this._HeadingSpring.CurrentValue;
-		//        this.Center = this.ConvertNormalizedMercatorToLocation(new Point(this._CenterNormalizedMercatorSpringX.CurrentValue, this._CenterNormalizedMercatorSpringY.CurrentValue));
-		//        this._ViewUpdatingInternally = false;
-		//    }
+		private void UpdateViewDependencyProperties()
+		{
+			this._ViewUpdatingInternally = true;
+			this.ZoomLevel = this._ZoomLevelSpring.CurrentValue;
+			this.Heading = this._HeadingSpring.CurrentValue;
+			this.Center = this.ConvertNormalizedMercatorToLocation(new Point(this._CenterNormalizedMercatorSpringX.CurrentValue, this._CenterNormalizedMercatorSpringY.CurrentValue));
+			this._ViewUpdatingInternally = false;
+		}
 
 		private void _MapContainer_SizeChanged(object sender, SizeChangedEventArgs e)
 		{
@@ -913,25 +914,25 @@ namespace Microsoft.Maps.MapControl.WPF
 			this.UpdateView();
 		}
 
-		//    private Location ConvertNormalizedMercatorToLocation(Point normalizedMercatorPoint)
-		//    {
-		//        Point point = this.ApplyWorldWrap(normalizedMercatorPoint);
-		//        return MapMath.NormalizeLocation(MercatorCube.Instance.ToLocation(new Microsoft.Maps.MapExtras.Point3D(point.X, point.Y, 0.0)));
-		//    }
+		private Location ConvertNormalizedMercatorToLocation(Point normalizedMercatorPoint)
+		{
+			Point point = this.ApplyWorldWrap(normalizedMercatorPoint);
+			return MapMath.NormalizeLocation(MercatorCube.Instance.ToLocation(new Microsoft.Maps.MapExtras.Point3D(point.X, point.Y, 0.0)));
+		}
 
 		private Point ConvertLocationToNormalizedMercator(Location location)
 		{
 			return MercatorCube.Instance.FromLocation(location).ToPoint();
 		}
 
-		//    private void MapCore_Loaded(object sender, RoutedEventArgs e)
-		//    {
-		//        if (this._MapModes.Count == 0)
-		//        {
-		//            this.Mode = new RoadMode();
-		//            this.Mode.SessionId = this.CredentialsProvider.SessionId;
-		//        }
-		//    }
+		private void MapCore_Loaded(object sender, RoutedEventArgs e)
+		{
+			if (this._MapModes.Count == 0)
+			{
+				this.Mode = new AerialMode(true); //new RoadMode();
+				//this.Mode.SessionId = this.CredentialsProvider.SessionId;
+			}
+		}
 
 		private void SetViewInternal(Point centerNormalizedMercator, double zoomLevel, double heading)
 		{

@@ -28,7 +28,7 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 
 		private bool _TemplateApplied;
 
-		//private DispatcherTimer _UpdateTimer;
+		private DispatcherTimer _UpdateTimer;
 
 		private static readonly Size MercatorModeLogicalAreaSizeInScreenSpaceAtLevel1;
 
@@ -55,21 +55,22 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 			this._Map = map;
 
 			this.AttachProperty();
-		
-			//	this._Map.ModeChanged += new EventHandler<MapEventArgs>(this._Map_ModeChanged);
-		//	this._Map.ViewChangeStart += new EventHandler<MapEventArgs>(this._Map_ViewChangeStart);
-		//	this._Map.ViewChangeEnd += new EventHandler<MapEventArgs>(this._Map_ViewChangeEnd);
 
-		//	this._UpdateTimer = new DispatcherTimer(DispatcherPriority.Normal, base.Dispatcher)
-		//	{
-		//		Interval = TimeSpan.FromMilliseconds(500.0)
-		//	};
-		//	this._UpdateTimer.Tick += new EventHandler(this._UpdateTimer_Tick);
-		//	this._copyrightUpdateTimer = new DispatcherTimer(DispatcherPriority.Normal, base.Dispatcher)
-		//	{
-		//		Interval = TimeSpan.FromMilliseconds(2000.0)
-		//	};
-		//	this._copyrightUpdateTimer.Tick += new EventHandler(this.CopyrightUpdateTimerTick);
+			this._Map.ModeChanged += new EventHandler<MapEventArgs>(this._Map_ModeChanged);
+			this._Map.ViewChangeStart += new EventHandler<MapEventArgs>(this._Map_ViewChangeStart);
+			this._Map.ViewChangeEnd += new EventHandler<MapEventArgs>(this._Map_ViewChangeEnd);
+
+			this._UpdateTimer = new DispatcherTimer(DispatcherPriority.Normal, base.Dispatcher)
+			{
+				Interval = TimeSpan.FromMilliseconds(500.0)
+			};
+			this._UpdateTimer.Tick += new EventHandler(this._UpdateTimer_Tick);
+
+			//	this._copyrightUpdateTimer = new DispatcherTimer(DispatcherPriority.Normal, base.Dispatcher)
+			//	{
+			//		Interval = TimeSpan.FromMilliseconds(2000.0)
+			//	};
+			//	this._copyrightUpdateTimer.Tick += new EventHandler(this.CopyrightUpdateTimerTick);
 		}
 
 		internal void AttachProperty()
@@ -111,10 +112,10 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 			this.RefreshMapMode();
 		}
 
-		//private void _Map_ModeChanged(object sender, MapEventArgs e)
-		//{
-		//	this.RefreshMapMode();
-		//}
+		private void _Map_ModeChanged(object sender, MapEventArgs e)
+		{
+			this.RefreshMapMode();
+		}
 
 		private void RefreshMapMode()
 		{
@@ -126,10 +127,10 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 			}
 		}
 
-		//private void _UpdateTimer_Tick(object sender, EventArgs e)
-		//{
-		//	this.UpdateScale();
-		//}
+		private void _UpdateTimer_Tick(object sender, EventArgs e)
+		{
+			this.UpdateScale();
+		}
 
 		//private void CopyrightUpdateTimerTick(object sender, EventArgs e)
 		//{
@@ -184,25 +185,25 @@ namespace Microsoft.Maps.MapControl.WPF.Overlays
 		//	}
 		//}
 
-		//private void _Map_ViewChangeStart(object sender, MapEventArgs e)
-		//{
-		//	if (this._TemplateApplied)
-		//	{
-		//		this._UpdateTimer.IsEnabled = true;
-		//		this._copyrightUpdateTimer.Stop();
-		//	}
-		//}
+		private void _Map_ViewChangeStart(object sender, MapEventArgs e)
+		{
+			if (this._TemplateApplied)
+			{
+				this._UpdateTimer.IsEnabled = true;
+				//this._copyrightUpdateTimer.Stop();
+			}
+		}
 
-		//private void _Map_ViewChangeEnd(object sender, MapEventArgs e)
-		//{
-		//	this._UpdateTimer.IsEnabled = false;
-		//	this._copyrightUpdateTimer.Stop();
-		//	this._copyrightUpdateTimer.Start();
-		//	if (this._TemplateApplied)
-		//	{
-		//		this.UpdateScale();
-		//	}
-		//}
+		private void _Map_ViewChangeEnd(object sender, MapEventArgs e)
+		{
+			this._UpdateTimer.IsEnabled = false;
+			//this._copyrightUpdateTimer.Stop();
+			//this._copyrightUpdateTimer.Start();
+			if (this._TemplateApplied)
+			{
+				this.UpdateScale();
+			}
+		}
 
 		private void UpdateScale()
 		{

@@ -133,15 +133,15 @@ namespace Microsoft.Maps.MapExtras
 			}
 		}
 
-		//public Matrix3D NormalizedTilePyramidToToViewportTransform
-		//{
-		//	set
-		//	{
-		//		this.tilePyramidToViewportTransform = value;
-		//		this.tilePyramidToViewportTransform.ScalePrepend(new Vector3D(1.0 / (double)this.tilePyramidDescriptor.FinestLevelWidth, 1.0 / (double)this.tilePyramidDescriptor.FinestLevelHeight, 1.0));
-		//		this.FireNeedsRender();
-		//	}
-		//}
+		public Matrix3D NormalizedTilePyramidToToViewportTransform
+		{
+			set
+			{
+				this.tilePyramidToViewportTransform = value;
+				this.tilePyramidToViewportTransform.ScalePrepend(new Vector3D(1.0 / (double)this.tilePyramidDescriptor.FinestLevelWidth, 1.0 / (double)this.tilePyramidDescriptor.FinestLevelHeight, 1.0));
+				this.FireNeedsRender();
+			}
+		}
 
 		//public double Opacity
 		//{
@@ -191,13 +191,13 @@ namespace Microsoft.Maps.MapExtras
 			}
 		}
 
-		//public TilePyramidRenderable(Canvas parentCanvas)
-		//{
-		//	this.tilePyramidCanvas = parentCanvas;
-		//	this.tilePyramidToViewportTransform = Matrix3D.Identity;
-		//	this.screenRect = new Rect(0.0, 0.0, 0.0, 0.0);
-		//	this.chooseLevelOfDetailSettings = TilePyramidRenderable.ChooseLevelOfDetailSettingsDownloadNormal;
-		//}
+		public TilePyramidRenderable(Canvas parentCanvas)
+		{
+			this.tilePyramidCanvas = parentCanvas;
+			this.tilePyramidToViewportTransform = Matrix3D.Identity;
+			this.screenRect = new Rect(0.0, 0.0, 0.0, 0.0);
+			this.chooseLevelOfDetailSettings = TilePyramidRenderable.ChooseLevelOfDetailSettingsDownloadNormal;
+		}
 
 		public void Render(Point2D viewportSize)
 		{

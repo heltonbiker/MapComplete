@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapComplete", "MapComplete\MapComplete.csproj", "{B3FB7DD6-E72E-4420-811C-D38745ADF0A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapComplete.MapControl", "MapComplete.MapControl\MapComplete.MapControl.csproj", "{EB041714-13B8-461D-8008-933CEB35D44A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapControl.WPF", "..\..\heltonbiker-XAML-Map-Control\MapControl\MapControl.WPF.csproj", "{226F3575-B683-446D-A2F0-181291DC8787}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B3FB7DD6-E72E-4420-811C-D38745ADF0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3FB7DD6-E72E-4420-811C-D38745ADF0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3FB7DD6-E72E-4420-811C-D38745ADF0A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB041714-13B8-461D-8008-933CEB35D44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB041714-13B8-461D-8008-933CEB35D44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB041714-13B8-461D-8008-933CEB35D44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB041714-13B8-461D-8008-933CEB35D44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{226F3575-B683-446D-A2F0-181291DC8787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{226F3575-B683-446D-A2F0-181291DC8787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{226F3575-B683-446D-A2F0-181291DC8787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{226F3575-B683-446D-A2F0-181291DC8787}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

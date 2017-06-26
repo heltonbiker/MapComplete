@@ -1,6 +1,4 @@
-﻿using MapComplete.MapControl;
-using Microsoft.Maps.MapControl.WPF;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,15 +14,9 @@ namespace MapComplete
 		{
 			base.OnStartup(e);
 
-			//var window = new MapCompleteWindow()
-			//{
-			//	DataContext = new MapCompleteViewModel()
-			//};
-
-			var window = new Window()
+			var window = new MapCompleteWindow()
 			{
-				Title = "MapComplete",
-				Content = new Map()
+				DataContext = new MapCompleteViewModel()
 			};
 
 			MainWindow = window;

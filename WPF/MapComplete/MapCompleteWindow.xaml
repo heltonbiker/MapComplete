@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
         xmlns:local="clr-namespace:MapComplete"
         mc:Ignorable="d"
         Title="MapComplete"
@@ -12,11 +13,13 @@
 		<SolidColorBrush x:Key="BackgroundLightGray" Color="#f0f0f0"/>
 	</Window.Resources>
 	
-    <DockPanel Background="#333">
+    <DockPanel>
 		<Menu DockPanel.Dock="Top">
+			<!--
 			<MenuItem Header="_Arquivo">
 				<MenuItem Header="_Abrir..."/>
 			</MenuItem>
+			-->
 		</Menu>
 
 		<Border DockPanel.Dock="Bottom" Padding="5" Background="{StaticResource BackgroundLightGray}">
@@ -33,17 +36,47 @@
 			<GridSplitter 
 				ResizeBehavior="PreviousAndNext"
 				ResizeDirection="Columns"
-				Width="5" Grid.Column="1"
-				Background="{StaticResource BackgroundLightGray}"/>
+				Width="5" Grid.Column="1"/>
 
 			<Grid Grid.Column="0" x:Name="LeftPanel">
-				<TreeView 
-					x:Name="ObjectGraph"
-					ItemsSource="{Binding ObjectGraph}"/>
+				<DockPanel>
+					<DockPanel DockPanel.Dock="Bottom">
+						<Label Content="BackUri:" HorizontalAlignment="Left" DockPanel.Dock="Top"/>
+						<TextBox Text="{Binding BackUri, UpdateSourceTrigger=PropertyChanged}"/>
+					</DockPanel>					
+					<DockPanel DockPanel.Dock="Bottom">
+						<Label Content="FrontUri:" HorizontalAlignment="Left" DockPanel.Dock="Top"/>
+						<TextBox Text="{Binding FrontUri, UpdateSourceTrigger=PropertyChanged}"/>
+					</DockPanel>
+					<Image Source="http://a-globalheat.strava.com/tiles/cycling/color1/2/1/2.png?v=6"/>
+					<!--
+					<TreeView 
+						x:Name="ObjectGraph"
+						ItemsSource="{Binding ObjectGraph}"
+					/>
+					-->
+				</DockPanel>
 			</Grid>
 
-			<Grid x:Name="RightPanel" Grid.Column="2">
 
+			<Grid x:Name="RightPanel" Grid.Column="2"  Background="#333">
+				<ItemsControl ItemsSource="{Binding Layers}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<map:Map 
+								IsItemsHost="True"
+								Center="-30, -51" 
+								ZoomLevel="2" 
+								MaxZoomLevel="30"
+								MouseWheelZoomDelta="0.5"
+							>
+								<map:Map.MapProjection>
+									<map:WebMercatorProjection/>
+								</map:Map.MapProjection>
+							</map:Map>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
 			</Grid>
 		</Grid>
 	</DockPanel>

@@ -14,55 +14,21 @@ namespace MapComplete
 		public ObservableCollection<IMapLayer> Layers { get; set; }
 			= new ObservableCollection<IMapLayer>();
 
-		MapTileLayer _googleBack = new MapTileLayer();
-		MapTileLayer _googleFront = new MapTileLayer();
+		MapTileLayer _baseLayer;
+		string _googleHybridUri = "https://mts{i}.google.com/vt?hl=pt-BR&lyrs=y&x={x}&y={y}&z={z}";
+
 
 		// CONSTRUCTOR
 		public MapCompleteViewModel()
 		{
-			UpdateTileLayer();
-
-			Layers.Add(_googleBack);
-			Layers.Add(_googleFront);
+			_baseLayer = new MapTileLayer()
+			{
+				TileSource = new ImageTileSource()
+				{
+					UriFormat = _googleHybridUri
+				}
+			};
+			Layers.Add(_baseLayer);
 		}		
-
-		public string BackUri
-		{
-			get { return _backUri; }
-			set
-			{
-				_backUri = value;
-				RaisePropertyChanged(() => BackUri);
-				UpdateTileLayer();
-			}
-		}
-		private string _backUri = "https://mts{i}.google.com/vt?hl=pt-BR&lyrs=y&x={x}&y={y}&z={z}";
-
-		public string FrontUri
-		{
-			get { return _frontUri; }
-			set
-			{
-				_frontUri = value;
-				RaisePropertyChanged(() => FrontUri);
-				UpdateTileLayer();
-			}
-		}
-		private string _frontUri = "https://mts{i}.google.com/vt?hl=pt-BR&lyrs=h&x={x}&y={y}&z={z}";
-
-
-
-		void UpdateTileLayer()
-		{
-			_googleBack.TileSource = new ImageTileSource()
-			{
-				UriFormat = BackUri
-			};
-
-			_googleFront.TileSource = new ImageTileSource()
-			{
-				UriFormat = FrontUri
-			};
-		}
 	}
 }

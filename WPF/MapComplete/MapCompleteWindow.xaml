@@ -40,6 +40,7 @@
 
 			<Grid Grid.Column="0" x:Name="LeftPanel">
 				<DockPanel>
+					<!--
 					<DockPanel DockPanel.Dock="Bottom">
 						<Label Content="BackUri:" HorizontalAlignment="Left" DockPanel.Dock="Top"/>
 						<TextBox Text="{Binding BackUri, UpdateSourceTrigger=PropertyChanged}"/>
@@ -49,12 +50,11 @@
 						<TextBox Text="{Binding FrontUri, UpdateSourceTrigger=PropertyChanged}"/>
 					</DockPanel>
 					<Image Source="http://a-globalheat.strava.com/tiles/cycling/color1/2/1/2.png?v=6"/>
-					<!--
-					<TreeView 
-						x:Name="ObjectGraph"
-						ItemsSource="{Binding ObjectGraph}"
-					/>
 					-->
+					<TreeView 
+						x:Name="OpenFilesTreeView"
+						ItemsSource="{Binding OpenFiles}"
+					/>
 				</DockPanel>
 			</Grid>
 
